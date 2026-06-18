@@ -30,6 +30,10 @@ jobs:
     name: Terraform Init Plan Apply
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./eks-lab/eks-cilium-lab
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
