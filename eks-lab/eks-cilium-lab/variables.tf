@@ -7,7 +7,8 @@ variable "cluster_name" {
 }
 
 variable "kubernetes_version" {
-  default = "1.33"
+  type = string
+  default = "1.36"
 }
 
 variable "cluster_admins" {
