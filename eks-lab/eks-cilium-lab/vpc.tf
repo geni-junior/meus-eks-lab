@@ -3,10 +3,6 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 
-  timeouts {
-    delete = "30m"
-  }
-
   tags = {
     Name = "${var.cluster_name}-vpc"
   }
@@ -14,10 +10,6 @@ resource "aws_vpc" "main" {
 
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
-
-  timeouts {
-    delete = "30m"
-  }
 
   tags = {
     Name = "${var.cluster_name}-igw"
@@ -29,10 +21,6 @@ resource "aws_subnet" "public_a" {
   cidr_block              = "10.10.1.0/24"
   availability_zone       = "${var.aws_region}a"
   map_public_ip_on_launch = true
-
-  timeouts {
-    delete = "30m"
-  }
 
   tags = {
     Name                     = "${var.cluster_name}-public-a"
@@ -46,10 +34,6 @@ resource "aws_subnet" "public_b" {
   availability_zone       = "${var.aws_region}b"
   map_public_ip_on_launch = true
 
-  timeouts {
-    delete = "30m"
-  }
-
   tags = {
     Name                     = "${var.cluster_name}-public-b"
     "kubernetes.io/role/elb" = "1"
@@ -58,10 +42,6 @@ resource "aws_subnet" "public_b" {
 
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
-
-  timeouts {
-    delete = "30m"
-  }
 
   tags = {
     Name = "${var.cluster_name}-public-rt"
