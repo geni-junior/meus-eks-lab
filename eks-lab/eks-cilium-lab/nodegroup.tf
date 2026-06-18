@@ -7,7 +7,7 @@ resource "aws_eks_node_group" "main" {
     aws_subnet.public_a.id,
     aws_subnet.public_b.id
   ]
-  
+
   ami_type       = "AL2023_x86_64_STANDARD"
   instance_types = ["t3.medium"]
   capacity_type  = "ON_DEMAND"
@@ -27,4 +27,11 @@ resource "aws_eks_node_group" "main" {
   tags = {
     Name = "${var.cluster_name}-node-group"
   }
+
+  timeouts {
+    create = "30m"
+    update = "30m"
+    delete = "30m"
+  }
+
 }
