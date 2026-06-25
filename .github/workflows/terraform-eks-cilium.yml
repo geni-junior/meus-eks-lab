@@ -1,0 +1,36 @@
+name: Terraform EKS Cilium Lab
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "eks-lab/eks-cilium-lab/**"
+      - ".github/workflows/terraform-eks-cilium.yml"
+      - ".github/workflows/reusable-terraform.yml"
+
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Escolha a ação do Terraform"
+        required: true
+        default: "plan"
+        type: choice
+        options:
+          - plan
+          - apply
+          - destroy
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform:
+    uses: ./.github/workflows/reusable-terraform.yml
+    with:
+      working_directory: ./eks-lab/eks-cilium-lab
+      aws_region: us-east-1
+      role_to_assume: arn:aws:iam::549312855031:role/GitHubActionsTerraformEksRole
+      terraform_version: "1.10.5"
+      action: ${{ github.event_name == 'push' && 'plan' || inputs.action }}
