@@ -1,14 +1,6 @@
 name: Terraform EKS Simple
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "eks-lab/eks-simple/**"
-      - ".github/workflows/terraform-eks-simple.yml"
-      - ".github/workflows/reusable-terraform.yml"
-
   workflow_dispatch:
     inputs:
       action:

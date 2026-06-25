@@ -1,14 +1,6 @@
 name: Terraform EKS Cilium Lab
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "eks-lab/eks-cilium-lab/**"
-      - ".github/workflows/terraform-eks-cilium.yml"
-      - ".github/workflows/reusable-terraform.yml"
-
   workflow_dispatch:
     inputs:
       action:
